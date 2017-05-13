@@ -8,3 +8,6 @@
 ## React-Redux
 1. Provider
 2. Connect
+
+## Thunk
+1. Async

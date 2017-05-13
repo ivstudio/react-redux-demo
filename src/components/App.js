@@ -8,9 +8,9 @@ class App extends Component {
         <Header/>
         {this.props.children}
       </div>
-    )
+    );
   }
-};
+}
 
 App.propTypes = {
   children: PropTypes.object.isRequired

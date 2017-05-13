@@ -9,6 +9,6 @@ class AboutPage extends Component {
       </div>
     );
   }
-};
+}
 
 export default AboutPage;
