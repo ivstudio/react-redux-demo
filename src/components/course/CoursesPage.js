@@ -40,7 +40,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-CoursesPage.prototypes = {
+CoursesPage.propTypes = {
   courses: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired
 };
