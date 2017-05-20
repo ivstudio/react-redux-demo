@@ -50,7 +50,7 @@ const CourseForm = ({course, allAuthors, onSave, onChange, loading, errors}) => 
 
     </form>
   );
-}
+};
 
 CourseForm.prototypes = {
   course: React.PropTypes.object.isRequired,
@@ -59,6 +59,6 @@ CourseForm.prototypes = {
   onChange: React.PropTypes.func.isRequired,
   loading: React.PropTypes.bool,
   errors: React.PropTypes.object
-}
+};
 
 export default CourseForm;
