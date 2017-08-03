@@ -40,7 +40,7 @@ const CourseForm = ({course, allAuthors, onSave, onChange, loading, errors}) => 
         error={errors.length}
       />
 
-      <TextInput
+      <input
         type="submit"
         disabled={loading}
         value={loading ? 'Saving...' : "Save"}

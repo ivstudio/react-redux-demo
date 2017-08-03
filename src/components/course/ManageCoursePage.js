@@ -13,12 +13,37 @@ class ManageCoursePage extends Component {
       course: Object.assign({}, this.props.course),
       errors:{}
     };
+
+    this.updateCourseState = this.updateCourseState.bind(this);
+    this.saveCourse =  this.saveCourse.bind(this);
   }
+
+  componentWillReceiveProps(nextProps){
+    if(this.props.course.id != nextProps.course.id){
+      this.setState({course:Object.assign({}, nextProps.course)});
+    }
+  }
+
+  updateCourseState(event){
+    const field = event.target.name;
+    let course = Object.assign({}, this.state.course);
+    course[field] = event.target.value;
+    return this.setState({course:course});
+  }
+
+  saveCourse(event){
+    event.preventDefault();
+    this.props.actions.saveCourse(this.state.course);
+    this.context.router.push('/courses');
+  }
+
 
   render(){
     return(
         <CourseForm
           allAuthors={this.props.authors}
+          onChange={this.updateCourseState}
+          onSave={this.saveCourse}
           course={this.state.course}
           errors={this.state.errors}
         />
@@ -27,12 +52,26 @@ class ManageCoursePage extends Component {
 
 }
 
+function getCourseById(courses, id) {
+  const course = courses.filter(course => course.id == id);
+  if (course) return course[0];
+  return null;
+}
+
 ManageCoursePage.propTypes = {
   course: PropTypes.object.isRequired,
-  authors: PropTypes.array.isRequired
+  authors: PropTypes.array.isRequired,
+  actions: PropTypes.object.isRequired
+};
+
+//Pull in React Router context so couter is available on this.context.router.
+ManageCoursePage.contextTypes = {
+  router: PropTypes.object
 };
 
 function mapStateToProps(state, ownProps) {
+  const courseId = ownProps.params.id; // form the path  `/course/:id` - NOTE: console.log(ownProps)
+
   let course = {
     id:'',
     watchHref:'',
@@ -41,6 +80,10 @@ function mapStateToProps(state, ownProps) {
     length:'',
     category:''
   };
+
+  if (courseId && state.courses.length > 0) {
+    course = getCourseById(state.courses, courseId);
+  }
 
   const authorsFormattedForDropdown = state.authors.map(author => {
     return {
