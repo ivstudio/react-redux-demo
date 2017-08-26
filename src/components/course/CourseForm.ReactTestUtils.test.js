@@ -4,7 +4,7 @@ import TestUtils from 'react-addons-test-utils';
 import CourseForm from './CourseForm';
 
 function setup(saving) {
-  let props = {
+  const props = {
     course:{}, saving: saving, errors: {},
     onSave:{},
     onChange:{}
