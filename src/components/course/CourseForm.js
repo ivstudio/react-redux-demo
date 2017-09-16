@@ -11,7 +11,7 @@ const CourseForm = ({course, allAuthors, onSave, onChange, saving, errors}) => {
         label="Title"
         value={course.title}
         onChange={onChange}
-        errors={errors.title}
+        error={errors.title}
       />
 
       <SelectInput
